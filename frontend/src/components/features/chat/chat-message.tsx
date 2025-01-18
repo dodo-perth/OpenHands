@@ -19,7 +19,7 @@ export function ChatMessage({
 }: React.PropsWithChildren<ChatMessageProps>) {
   const [isHovering, setIsHovering] = React.useState(false);
   const [isCopy, setIsCopy] = React.useState(false);
-
+  const [timestamp] = React.useState(new Date().toLocaleTimeString());
   const handleCopyToClipboard = async () => {
     await navigator.clipboard.writeText(message);
     setIsCopy(true);
@@ -70,6 +70,10 @@ export function ChatMessage({
         {message}
       </Markdown>
       {children}
+      {type === "assistant" && (
+        <span className="text-xs text-gray-500 self-begin">{timestamp}</span>
+      )}
     </article>
   );
 }
+
